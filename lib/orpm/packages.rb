@@ -54,7 +54,7 @@ module Orpm
           end
         end
       end
-      results
+      results.empty? ? false : results
     end
 
     def add_package(args={})

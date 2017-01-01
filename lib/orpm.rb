@@ -20,6 +20,16 @@ module Orpm
       @packages = Packages.new
     end
 
+    def config(file)
+      info = YAML.load_file(file)
+      if info['package_file'] 
+        packages.batch_parse(file: info['package_file'])
+      end
+      if info['package_files']
+        packages.batch_parse(files: info['package_files'])
+      end
+    end
+
     def debug
       binding.pry
     end

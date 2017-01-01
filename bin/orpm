@@ -35,6 +35,7 @@ opts = Trollop::options do
 	version "Honey Pot v 1.0"
 	opt :packages, "specify a list of packages to work with", :type => :strings
 	opt :Sudo, "install packages with sudo if possible"
+	opt :config, "orpm configuration file to use"
 	opt :install, "package manager is decided automagically"
 	opt :apt, "install packages with apt"
 	opt :yum, "install packages with yum"
@@ -58,25 +59,39 @@ if opts[:Poem]
 end
 
 # Package manager logic from OneRing powers.
-package_manager = Orpm::OneRing.new(opts)
+package_manager = Orpm::Manager.new
+
+if opts[:config]
+  package_manager.config(opts[:config]) 
+else
+  unless package_manager.packages.batch_parse(file: "packages.yaml")
+    abort "Unable to load any packages to work with!"
+  end
+end
+
+
 
 if opts[:search]
 	opts[:packages].each do |package|
-		package_manager.search(package)
+		if package_manager.packages.search(name: package)
+      puts "[+]".green + " #{package.bold}"
+    else
+      puts "[-]".red + " #{package.red}"
+    end
 	end
   exit 0
 end
 
 if opts[:Info]
-	opts[:packages].each do |package|
-		package_manager.show_info(package)
+  opts[:packages].each do |package|
+		package_manager.packages.search(name: package).show_info
 	end
   exit 0
 end
 
 if opts[:install]
   opts[:packages].each do |packages|
-    package_manager.show_info(package)
+		package_manager.show_info(package)
   end
 end
 
