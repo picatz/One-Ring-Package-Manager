@@ -43,6 +43,7 @@ opts = Trollop::options do
 	opt :git, "install packages with git"
 	opt :raw, "install packages with git raw"
 	opt :Info, "get information about selected packages"
+	opt :Check, "check if packages have already been installed"
 	opt :Yes, "set default answer yes to any iterative menus"
 	opt :search, "search for selected packages to see if they exist"
 	opt :Poem, "display a beautiful Tolkien-esque parody poem"
@@ -87,6 +88,21 @@ if opts[:Info]
 		package_manager.packages.search(name: package).show_info
 	end
   exit 0
+end
+
+if opts[:Check]
+  opts[:packages].each do |package|
+		if package_manager.packages.search(name: package)
+      package = package_manager.packages.search(name: package)
+      if package.installed?
+        puts "[+]".green + " #{package.name.bold}"
+      else
+        puts "[-]".red + " #{package.name.red}"
+      end
+    else
+      puts "[-]".red + " #{package.red}"
+    end
+  end
 end
 
 if opts[:install]
