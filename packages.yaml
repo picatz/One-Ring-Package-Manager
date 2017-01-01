@@ -623,16 +623,19 @@ strace:
         is not using any library function, and it uses only system calls, then using
         plain ltrace, we cannot trace the program execution. In thise, the who command.
       command: strace /usr/bin/who
-clang: 
-apktool: 
-clang++: 
-dex2jar: 
-flasm: 
-jad: 
-javasnoop: 
-NASMshell: 
-ollydbg: 
-radare2: 
+#clang: 
+#apktool: 
+#clang++: 
+#dex2jar: 
+#flasm: 
+#jad: 
+#javasnoop: 
+#NASMshell: 
+#msfpayload: 
+#ollydbg: 
+#set: 
+#searchsploit: 
+#radare2: 
 t50:
   name: T50 - Very fast network stress tool
   install:
@@ -806,7 +809,6 @@ shard:
       description: Given a username and password shard will attempt to authenticate
         with multiple sites.
       command: java -jar shard-1.0.jar -u USERNAME -p PASSWORDS
-searchsploit: 
 beefxxs:
   name: BeEF
   install:
@@ -834,7 +836,6 @@ beefxxs:
     Example 2:
       description: Stop BeEF gui
       command: service beef-xss stop
-msfpayload: 
 msfvenom:
   name: Metasploit standalone payload generator
   install:
@@ -856,7 +857,6 @@ msfvenom:
       description: An example msfvenom payload for windows.
       command: msfvenom -a x86 --platform Windows -p windows/shell/bind_tcp -e x86/shikata_ga_nai
         -b '\x00' -i 3 -f python
-set: 
 sqlmap:
   name: sqlmap
   install:

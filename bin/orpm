@@ -60,11 +60,26 @@ end
 # Package manager logic from OneRing powers.
 package_manager = Orpm::OneRing.new(opts)
 
+if opts[:search]
+	opts[:packages].each do |package|
+		package_manager.search(package)
+	end
+  exit 0
+end
+
 if opts[:Info]
 	opts[:packages].each do |package|
 		package_manager.show_info(package)
 	end
+  exit 0
 end
+
+if opts[:install]
+  opts[:packages].each do |packages|
+    package_manager.show_info(package)
+  end
+end
+
 
 # Debug mode from options.
 if opts[:debug]
