@@ -34,22 +34,22 @@ opts = Trollop::options do
 	banner "O R P M".red.bold + " | " + "One Ring Package Manager".white.bold
 	version "Honey Pot v 1.0"
 	opt :packages, "specify a list of packages to work with", :type => :strings
-	opt :Sudo, "install packages with sudo if possible"
-	opt :config, "orpm configuration file to use"
-	opt :install, "package manager is decided automagically"
-	opt :apt, "install packages with apt"
-	opt :yum, "install packages with yum"
-	opt :brew, "install packages with brew"
-	opt :git, "install packages with git"
-	opt :raw, "install packages with git raw"
-	opt :Info, "get information about selected packages"
-	opt :Check, "check if packages have already been installed"
-	opt :Yes, "set default answer yes to any iterative menus"
-	opt :search, "search for selected packages to see if they exist"
-	opt :Poem, "display a beautiful Tolkien-esque parody poem"
-	opt :Debug, "enter a debug mode with pry"
-	opt :list, "list the available packages"
-	opt :Rainbow, "rainbow support, because we need it"
+	opt :Sudo,     "install packages with sudo if possible"
+	opt :config,   "orpm configuration file to use"
+	opt :install,  "package manager is decided automagically"
+	opt :apt,      "install packages with apt"
+	opt :yum,      "install packages with yum"
+	opt :brew,     "install packages with brew"
+	opt :git,      "install packages with git"
+	opt :raw,      "install packages with git raw"
+	opt :Info,     "get information about selected packages"
+	opt :Check,    "check if packages have already been installed"
+	opt :Yes,      "set default answer yes to any iterative menus"
+	opt :search,   "search for selected packages to see if they exist"
+	opt :Poem,     "display a beautiful Tolkien-esque parody poem"
+	opt :Debug,    "enter a debug mode with pry"
+	opt :list,     "list the available packages"
+	opt :Rainbow,  "rainbow support, because we need it"
 	#opt :Logging, "Log all connections."
 end
 
@@ -92,7 +92,7 @@ end
 
 if opts[:Check]
   opts[:packages].each do |package|
-		if package_manager.packages.search(name: package)
+    if package_manager.packages.search(name: package)
       package = package_manager.packages.search(name: package)
       if package.installed?
         puts "[+]".green + " #{package.name.bold}"
