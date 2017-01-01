@@ -30,6 +30,17 @@ module Orpm
       end
     end
 
+    def determine_installer
+      `which apt-get`
+      return "apt" if $?.success?
+      `which yum`
+      return "yum" if $?.success?
+      `which brew`
+      return "brew" if $?.success?
+      `which git`
+      return "git" if $?.success?
+    end
+
     def debug
       binding.pry
     end

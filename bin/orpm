@@ -5,24 +5,24 @@ require 'pry'
 require 'orpm'
 
 def banner
-	puts "ORPM ".bold + " One Ring Package Manager".bold.red
+  puts "ORPM ".bold + " One Ring Package Manager".bold.red
 end
 
 def poem
-	puts
-	puts "Brew for the Apple-kings under the sky,"
-	puts "Aptitude for the Debian-lords in their halls of stone,"
-	puts "Yellowdog for Red-Hatted Men doomed to die,"
-	puts "Git for the Open Lord on his open throne"
-	puts "In the Land of Terminals where the Hackers lie."
-	puts "One Ring to rule them all, One Ring to find them,"
-	puts "One Ring to bring them all and in the darkness bind them"
-	puts "In the Land of Teminals where the Hackers lie."
-	puts
+  puts
+  puts "Brew for the Apple-kings under the sky,"
+  puts "Aptitude for the Debian-lords in their halls of stone,"
+  puts "Yellowdog for Red-Hatted Men doomed to die,"
+  puts "Git for the Open Lord on his open throne"
+  puts "In the Land of Terminals where the Hackers lie."
+  puts "One Ring to rule them all, One Ring to find them,"
+  puts "One Ring to bring them all and in the darkness bind them"
+  puts "In the Land of Teminals where the Hackers lie."
+  puts
 end
 
 def clear_screen
-	system('clear')
+  system('clear')
 end
 
 
@@ -31,32 +31,32 @@ foo = ARGV[0] || ARGV[0] = '-h'
 
 # Available options.
 opts = Trollop::options do
-	banner "O R P M".red.bold + " | " + "One Ring Package Manager".white.bold
-	version "Honey Pot v 1.0"
-	opt :packages, "specify a list of packages to work with", :type => :strings
-	opt :Sudo,     "install packages with sudo if possible"
-	opt :config,   "orpm configuration file to use"
-	opt :install,  "package manager is decided automagically"
-	opt :apt,      "install packages with apt"
-	opt :yum,      "install packages with yum"
-	opt :brew,     "install packages with brew"
-	opt :git,      "install packages with git"
-	opt :raw,      "install packages with git raw"
-	opt :Info,     "get information about selected packages"
-	opt :Check,    "check if packages have already been installed"
-	opt :Yes,      "set default answer yes to any iterative menus"
-	opt :search,   "search for selected packages to see if they exist"
-	opt :Poem,     "display a beautiful Tolkien-esque parody poem"
-	opt :Debug,    "enter a debug mode with pry"
-	opt :list,     "list the available packages"
-	opt :Rainbow,  "rainbow support, because we need it"
-	#opt :Logging, "Log all connections."
+  banner "O R P M".red.bold + " | " + "One Ring Package Manager".white.bold
+  version "Honey Pot v 1.0"
+  opt :packages, "specify a list of packages to work with", :type => :strings
+  opt :Sudo,     "install packages with sudo if possible"
+  opt :config,   "orpm configuration file to use"
+  opt :install,  "package manager is decided automagically"
+  opt :apt,      "install packages with apt"
+  opt :yum,      "install packages with yum"
+  opt :brew,     "install packages with brew"
+  opt :git,      "install packages with git"
+  opt :raw,      "install packages with git raw"
+  opt :Info,     "get information about selected packages"
+  opt :Check,    "check if packages have already been installed"
+  opt :Yes,      "set default answer yes to any iterative menus"
+  opt :search,   "search for selected packages to see if they exist"
+  opt :Poem,     "display a beautiful Tolkien-esque parody poem"
+  opt :Debug,    "enter a debug mode with pry"
+  opt :list,     "list the available packages"
+  opt :Rainbow,  "rainbow support, because we need it"
+  #opt :Logging, "Log all connections."
 end
 
 # If user just wants a cute little poem.
 if opts[:Poem]
-	poem
-	exit 0
+  poem
+  exit 0
 end
 
 # Package manager logic from OneRing powers.
@@ -73,20 +73,20 @@ end
 
 
 if opts[:search]
-	opts[:packages].each do |package|
-		if package_manager.packages.search(name: package)
+  opts[:packages].each do |package|
+    if package_manager.packages.search(name: package)
       puts "[+]".green + " #{package.bold}"
     else
       puts "[-]".red + " #{package.red}"
     end
-	end
+  end
   exit 0
 end
 
 if opts[:Info]
   opts[:packages].each do |package|
-		package_manager.packages.search(name: package).show_info
-	end
+    package_manager.packages.search(name: package).show_info
+  end
   exit 0
 end
 
@@ -106,15 +106,38 @@ if opts[:Check]
 end
 
 if opts[:install]
-  opts[:packages].each do |packages|
-		package_manager.show_info(package)
+  opts[:packages].each do |package|
+    if package_manager.packages.search(name: package)
+      puts "[?]".yellow + " Installing #{package.bold} ..."
+      orpm_package = package_manager.packages.search(name: package)
+      # build arguments
+      args = {}
+      args[:Sudo]           = opts[:Sudo]
+      args[:Yes]            = opts[:Yes]
+      if opts[:apt]
+        args[:installer] = "apt"
+      elsif opts [:yum]
+        args[:installer] = "yum"
+      elsif opts [:brew]
+        args[:installer] = "brew"
+      else
+        args[:installer] = package_manager.determine_installer
+      end
+      if orpm_package.install(args)
+        puts "[+]".green + " Installed #{package.bold}"
+      else
+        puts "[-] unable to install #{package.bold}".red
+      end
+    else
+      puts "[-] unable to install #{package.bold}".red
+    end
   end
 end
 
 
 # Debug mode from options.
 if opts[:debug]
-	package_manager.debug
+  package_manager.debug
 end
 
 exit 0

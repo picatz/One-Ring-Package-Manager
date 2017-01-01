@@ -137,6 +137,34 @@ module Orpm
       `which #{package_name}`
       $?.success?
     end
+    
+    def install(args={})
+      # TODO: fix weak check
+      if args[:installer] == "apt"
+        command = build_command(args, apt)        
+      elsif args[:installer] == "yum"
+        command = build_command(args, yum)        
+      elsif args[:installer] == "brew"
+        command = build_command(args, brew)        
+      elsif args[:installer] == "git"
+        command = build_command(args, git)        
+      elsif args[:installer] == "script"
+        command = build_command(args, script)        
+      end
+      `#{command}`
+      $?.success?
+    end
+   
+    private
+
+    def build_command(args, installer)
+      command = []
+      command << "sudo" if args[:Sudo]
+      command << installer
+      command << "-y" if args[:Yes]
+      command.join(' ')
+    end 
+
 
   end
 
