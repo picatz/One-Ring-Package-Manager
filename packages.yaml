@@ -1,0 +1,1005 @@
+---
+dmitry:
+  name: Deepmagic Information Gathering Tool
+  install:
+    apt: apt-get install dmitry
+    yum: false
+    brew: false
+    git: false
+    script: false
+  source: http://mor-pah.net/software/dmitry-deepmagic-information-gathering-tool/
+  description: DMitry has the ability to gather as much information as possible about
+    a host. Base functionality is able to gather possible subdomains, email addresses,
+    uptime information, tcp port scan, whois lookups, and more.
+  dependencies:
+  - c
+  help:
+  - http://tools.kali.org/information-gathering/dmitry
+  examples:
+    Example 1:
+      description: Run a domain whois lookup (w), an IP whois lookup (i), retrieve
+        Netcraft info (n), search for subdomains (s), search for email addresses (e),
+        do a TCP port scan (p), and save the output to example.txt (o) for the domain
+        example.com
+      command: dmitry -winsepo example.txt example.com
+mysqlaudit:
+  name: Deepmagic Information Gathering Tool
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/mvatanen/mysqlaudit.git
+    script: false
+  source: https://github.com/mvatanen/mysqlaudit
+  description: Shell script that can be user to query data from Mysql database for
+    audit or security purposes.
+  dependencies:
+  - bash
+  - mysql
+  help:
+  - https://github.com/mvatanen/mysqlaudit
+  examples: 
+fierce:
+  name: Fierce - DNS reconnaissance tool
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/mschwager/fierce.git
+    script: false
+    custom: git clone https://github.com/mschwager/fierce.git; cd fierce; pip3 install
+      -r requirements.txt; python3 fierce.py -h
+  source: https://github.com/mschwager/fierce
+  description: Fierce is a semi-lightweight scanner that helps locate non-contiguous
+    IP space and hostnames against specified domains. It’s really meant as a pre-cursor
+    to nmap, unicornscan, nessus, nikto, etc, since all of those require that you
+    already know what IP space you are looking for. This does not perform exploitation
+    and does not scan the whole internet indiscriminately. It is meant specifically
+    to locate likely targets both inside and outside a corporate network. Because
+    it uses DNS primarily you will often find mis-configured networks that leak internal
+    address space. That’s especially useful in targeted malware.
+  dependencies:
+  - python3
+  - pip3
+  help:
+  - https://n0where.net/dns-reconnaissance-tool-fierce/
+  examples:
+    Example 1:
+      description: Traverse IPs near discovered domains to search for contiguous blocks
+        with the --traverse flag
+      command: fierce --domain facebook.com --subdomains admin --traverse 10
+    Example 2:
+      description: Limit nearby IP traversal to certain domains with the --search
+        flag
+      command: fierce --domain facebook.com --subdomains admin --search fb.com fb.net
+    Example 3:
+      description: Basic search on target domain
+      command: fierce --domain google.com --subdomains accounts admin ads
+    Example 4:
+      description: Internal networks will often have large blocks of contiguous IP
+        space assigned. We can scan those as well
+      command: fierce --dns-servers 10.0.0.1 --range 10.0.0.0/24
+netdiscover:
+  name: Netdiscover
+  source: https://github.com/alexxy/netdiscover
+  install:
+    apt: apt-get install dmitry
+    yum: false
+    brew: false
+    git: false
+    script: false
+  description: Netdiscover is a network address discovering tool, developed mainly
+    for those wireless networks without dhcp server, it also works on hub/switched
+    networks. Its based on arp packets, it will send arp requests and sniff for replys.
+  dependencies:
+  - libpcap
+  - libnet > 1.1.2
+  - C
+  help:
+  - http://tools.kali.org/information-gathering/dmitry
+  examples:
+    Example 1:
+      description: Discover host in an internal range ( -r ) using CIDR notation.
+      command: netdiscover -r 192.168.1.0/24
+p0f:
+  name: Passive OS fingerprinting tool
+  source: http://lcamtuf.coredump.cx/p0f3/
+  install:
+    apt: apt-get install p0f
+    yum: false
+    brew: brew install p0f
+    git: git clone https://github.com/p0f/p0f.git
+    script: false
+  description: P0f is a tool that utilizes an array of sophisticated, purely passive
+    traffic fingerprinting mechanisms to identify the players behind any incidental
+    TCP/IP communications (often as little as a single normal SYN) without interfering
+    in any way.
+  dependencies:
+  - c
+  help:
+  - http://tools.kali.org/information-gathering/p0f
+  examples:
+    Example 1:
+      description: Use interface eth0 (-i eth0) in promiscuous mode (-p), saving the
+        results to a file (-o /tmp/p0f.log)
+      command: p0f -i eth0 -p -o /tmp/p0f.log
+golsimero:
+  name: GoLismero
+  install:
+    apt: apt-get install golismero
+    yum: false
+    brew: false
+    git: git clone https://github.com/golismero/golismero.git
+    script: false
+  source: https://github.com/golismero/golismero
+  description: GoLismero is an open source framework for security testing. It's currently
+    geared towards web security, but it can easily be expanded to other kinds of scans.
+  dependencies:
+  - python2.7
+  - python2.7-dev
+  - python-pip
+  - python-docutils
+  - git
+  - perl
+  - nmap
+  - sslscan
+  help:
+  examples:
+lynis:
+  name: Lynis
+  install:
+    apt: apt-get install lynis
+    yum: false
+    brew: brew install lynis
+    git: git clone https://github.com/CISOfy/lynis.git
+    script: false
+    custom: wget https://cisofy.com/files/lynis-2.2.0.tar.gz; tar -xvf lynis-2.2.0.tar.gz;
+      cd lynis; ./lynis
+  source: https://github.com/CISOfy/lynis
+  description: Lynis is an open source and much powerful auditing tool for Unix/Linux
+    like operating systems. It scans system for security information, general system
+    information, installed and available software information, configuration mistakes,
+    security issues, user accounts without password, wrong file permissions, firewall
+    auditing, etc.
+  dependencies:
+  - Shell
+  help:
+  - https://cisofy.com/documentation/lynis/
+  - https://linux-audit.com/lynis/
+  examples:
+    Example 1:
+      description: Use lynis to check host for problems
+      command: lynis --check-all
+nikto:
+  name: Nikto
+  install:
+    apt: apt-get install nikto
+    yum: false
+    brew: brew install nikto
+    git: git clone https://github.com/sullo/nikto.git
+    script: false
+    custom: 
+  source: https://github.com/sullo/nikto
+  description: Nikto is an Open Source (GPL) web server scanner which performs comprehensive
+    tests against web servers for multiple items, including over 6700 potentially
+    dangerous files/CGIs, checks for outdated versions of over 1250 servers, and version
+    specific problems on over 270 servers.
+  dependencies:
+  - Perl
+  - libnet-ssleay-perl
+  help:
+  - https://hackertarget.com/nikto-tutorial/
+  - https://cirt.net/nikto2-docs/
+  examples:
+    Example 1:
+      description: Use source perl file from github to target host.
+      command: perl nikto.pl -host target.com
+    Example 2:
+      description: Use nikto installed in kali against target 192.168.1.3.
+      command: nikto -h 192.168.1.3
+nmap:
+  name: Network Mapper
+  install:
+    apt: apt-get install nmap
+    yum: yum install nmap
+    brew: brew install nmap
+    git: git clone https://github.com/nmap/nmap.git
+    script: false
+  source: https://nmap.org/download.html
+  description: Network exploration tool and security / port scanner.
+  dependencies:
+  - C
+  - C++
+  - Python
+  - Lua
+  help:
+  - https://nmap.org/docs.html
+  examples:
+    Example 1:
+      description: Scan all ports with a service, version detection on your local
+        class C network.
+      command: nmap -sV -p 1-65535 192.168.1.1/24
+    Example 2:
+      description: Scan most common ports.
+      command: nmap -F 192.168.1.1
+    Example 3:
+      description: Scan targets from a text file.
+      command: nmap -iL list-of-ips.txt
+ftpmap:
+  name: FTPmap - FTP scanner
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone git://github.com/Hypsurus/ftpmap.git
+    script: false
+  source: https://github.com/Hypsurus/ftpmap
+  description: Ftpmap scans remote FTP servers to indentify what software and what
+    versions they are running. It uses program-specific fingerprints to discover the
+    name of the software even when banners have been changed or removed, or when some
+    features have been disabled. FTP-Map will try to detect exploits by the FTP software/version.
+  dependencies:
+  - C
+  - ftp
+  help:
+  - https://n0where.net/ftp-scanner-ftpmap/
+  examples:
+    Example 1:
+      description: Scan localhost.
+      command: ftpmap -Sgs localhost
+    Example 2:
+      description: Scan multiple FTP servers from list.
+      command: ftpmap -gL list.txt
+    Example 3:
+      description: Upload a file.
+      command: ftpmap -s localhost --user root --password root -U 'topsecretfile.txt'
+    Example 4:
+      description: Download a file.
+      command: ftpmap -s localhost --user root --password root -d '/topsecretfile.txt'
+    Example 5:
+      description: List files.
+      command: ftpmap -s localhost --user anonymous -p null -l '/'
+nsearch:
+  name: NSEarch - Nmap Scripting Engine Search
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/JKO/nsearch.git
+    script: false
+  source: https://github.com/JKO/nsearch
+  description: nsearch , is a tool that helps you find scripts that are used nmap
+    ( nse ) , can be searched using the name, category author or combining the parameters,
+    it is also possible to see the documentation of the scripts found, the principal
+    programing is python You can save your favorites scripts into a db table and set
+    a ranking The tool has an auto installer script for debian (ubuntu, mint, kali
+    linux), Red Hat(Fedora, CentOS) and MacOX.
+  dependencies:
+  - Python
+  - pyyaml
+  - python-i18n
+  help:
+  - https://n0where.net/nmap-scripting-engine-search-nsearch/
+  examples:
+    Example 1:
+      description: Use NSEarch
+      command: python nsearch.py
+lazymap:
+  name: LazyMap - Auto NMAP Scanning Script
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/commonexploits/port-scan-automation.git
+    script: false
+  source: https://nmap.org/download.html
+  description: Automated NMAP scans and custom Nessus polices.
+  dependencies:
+  - nmap
+  - Shell
+  help:
+  - https://n0where.net/auto-nmap-scanning-script-lazymap/
+  examples:
+    Example 1:
+      description: Use lazymap simply.
+      command: "./lazymap.sh"
+unix-privesc-check:
+  name: Unix-privesc-checker
+  install:
+    apt: apt-get install unix-privesc-check
+    yum: false
+    brew: false
+    git: git clone https://github.com/pentestmonkey/unix-privesc-check.git
+    script: false
+    custom: wget http://pentestmonkey.net/tools/unix-privesc-check/unix-privesc-check-1.4.tar.gz;
+      tar zxvf unix-privesc-check-1.4.tar.gz; cd unix-privesc-check-1.4; ./unix-privesc-check
+  source: https://github.com/pentestmonkey/unix-privesc-check
+  description: Unix-privesc-checker is a script that runs on Unix systems (tested
+    on Solaris 9, HPUX 11, Various Linuxes, FreeBSD 6.2). It tries to find misconfigurations
+    that could allow local unprivileged users to escalate privileges to other users
+    or to access local apps (e.g. databases).
+  dependencies:
+  - Shell
+  help:
+  - http://pentestmonkey.net/tools/audit/unix-privesc-check
+  examples:
+    Example 1:
+      description: Save output of script to output.txt file
+      command: "./unix-privesc-check > output.txt"
+crunch:
+  name: Crunch
+  install:
+    apt: apt-get install crunch
+    yum: false
+    brew: brew install crunch
+    git: git clone https://github.com/jaalto/external-sf--crunch-wordlist.git
+    script: false
+  source: https://sourceforge.net/projects/crunch-wordlist/
+  description: Crunch is a wordlist generator where you can specify a standard character
+    set or a character set you specify. crunch can generate all possible combinations
+    and permutations.
+  dependencies:
+  - C
+  help:
+  - http://tools.kali.org/password-attacks/crunch
+  examples:
+    Example 1:
+      description: Create a wordlist that will have minimum length of characters 5,maximum
+        length of characters 5 with the characters of admin and it will save it on
+        a .txt file
+      command: "./crunch 5 5 admin -o fivebyfive.txt"
+cewl:
+  name: Cewl
+  install:
+    apt: apt-get install cewl
+    yum: false
+    brew: false
+    git: git clone https://github.com/crunchsec/cewl.git
+    script: false
+  source: https://digi.ninja/projects/cewl.php
+  description: CeWL is a ruby app which spiders a given url to a specified depth,
+    optionally following external links, and returns a list of words which can then
+    be used for password crackers such as John the Ripper.
+  dependencies:
+  - Ruby
+  help:
+  - http://tools.kali.org/password-attacks/cewl
+  examples:
+    Example 1:
+      description: Create a wordlist, crawling the website 5 pages in, with a min
+        wordlenght of 7 characters at minimum.
+      command: cewl -w customwordlist.txt -d 5 -m 7 www.target-website.com
+hashcat:
+  name: Hashcat
+  install:
+    apt: apt-get install hashcat
+    yum: false
+    brew: false
+    git: git clone https://github.com/hashcat/hashcat.git
+    script: false
+    custom: wget http://hashcat.net/files/hashcat-0.47.7z; 7za x hashcat-0.47.7z;
+      cd hashcat-0.47/; ./hashcat-cli64.bin --help
+  source: https://hashcat.net/hashcat/
+  description: hashcat is the world's fastest and most advanced password recovery
+    utility, supporting five unique modes of attack for over 160 highly-optimized
+    hashing algorithms. hashcat currently supports CPU's, GPU's other hardware-accelerators
+    on Linux, Windows and OSX, and has facilities to help enable distributed password
+    cracking.
+  dependencies:
+  - C
+  help:
+  - https://hashcat.net/wiki/
+  - http://m0m3nt0.com/2014/09/hashcat-cheat-sheet-basic/
+  examples:
+    Example 1:
+      description: In dictionary attack mode hashcat will use a given password list
+        “password.lst” in order to crack the the hashed value.
+      command: hashcat --hash 0 --attack-mode 0 --outfile cracked.txt pass.hash password.lst
+    Example 2:
+      description: Brute Force Attack (masked). In masked attack more, hashcat will
+        try every possibility and combination according the given mask. The mask can
+        be any char + special symbols used to specify various chars.
+      command: hashcat --hash 0 --attack-mode 0 --outfile cracked.txt pass.hash password.lst
+john:
+  name: John the Ripper
+  install:
+    apt: apt-get install john
+    yum: false
+    brew: brew install john
+    git: git clone https://github.com/magnumripper/JohnTheRipper.git
+    script: false
+  source: http://openwall.com/john/
+  description: John the Ripper is a fast password cracker, currently available for
+    many flavors of Unix (11 are officially supported, not counting different architectures),
+    Windows, DOS, BeOS, and OpenVMS (the latter requires a contributed patch). Its
+    primary purpose is to detect weak Unix passwords. Besides several crypt(3) password
+    hash types most commonly found on various Unix flavors, supported out of the box
+    are Kerberos/AFS and Windows LM hashes, as well as DES-based tripcodes, plus many
+    more hashes and ciphers in "community enhanced" -jumbo versions and/or with other
+    contributed patches.
+  dependencies:
+  - C
+  help:
+  - http://openwall.com/john/
+  examples:
+    Example 1:
+      description: In dictionary attack mode hashcat will use a given password list
+        “password.lst” in order to crack the the hashed value.
+      command: hashcat --hash 0 --attack-mode 0 --outfile cracked.txt pass.hash password.lst
+    Example 2:
+      description: Brute Force Attack (masked). In masked attack more, hashcat will
+        try every possibility and combination according the given mask. The mask can
+        be any char + special symbols used to specify various chars.
+      command: hashcat --hash 0 --attack-mode 0 --outfile cracked.txt pass.hash password.lst
+medusa:
+  name: Medusa
+  install:
+    apt: apt-get install medusa
+    yum: false
+    brew: false
+    git: git clone https://github.com/jmk-foofus/medusa.git
+    script: false
+    custom: wget http://www.foofus.net/jmk/tools/medusa-2.0.tar.gz; ./configure; make;
+      make install
+  source: https://github.com/jmk-foofus/medusa
+  description: Medusa is a speedy, parallel, and modular, login brute-forcer. The
+    goal is to support as many services which allow remote authentication as possible.
+  dependencies:
+  - C
+  help:
+  - http://www.janoweb.net/tutorials/installing-medusa-password-cracker.html#axzz4FXWFjQne
+  - https://hackertarget.com/brute-forcing-passwords-with-ncrack-hydra-and-medusa/
+  examples:
+    Example 1:
+      description: Used medusa to attack SSH on target 10.10.10.10 using root and
+        passwordlist
+      command: medusa -u root -P 500-worst-passwords.txt -h 10.10.10.10 -M ssh
+ncrack:
+  name: Ncrack
+  install:
+    apt: apt-get install ncrack
+    yum: false
+    brew: false
+    git: git clone https://github.com/nmap/ncrack.git
+    script: false
+    custom: wget http://nmap.org/ncrack/dist/ncrack-0.4ALPHA.tar.gz; ./configure;
+      make; make install
+  source: http://nmap.org/ncrack
+  description: Ncrack is an open source tool for network authentication cracking.
+    It was designed for high-speed parallel cracking using a dynamic engine that can
+    adapt to different network situations. Ncrack can also be extensively fine-tuned
+    for special cases, though the default parameters are generic enough to cover almost
+    every situation.
+  dependencies:
+  - C
+  help:
+  - http://tools.kali.org/password-attacks/ncrack
+  - https://hackertarget.com/brute-forcing-passwords-with-ncrack-hydra-and-medusa/
+  examples:
+    Example 1:
+      description: Used ncrack to attack SSH on target 10.10.10.10 using root and
+        passwordlist
+      command: ncrack -p 22 --user root -P 500-worst-passwords.txt 10.10.10.10
+hydra:
+  name: THC-Hydra
+  install:
+    apt: apt-get install hydra
+    yum: false
+    brew: brew install hydra
+    git: git clone https://github.com/vanhauser-thc/thc-hydra.git
+    script: false
+    custom: wget http://freeworld.thc.org/releases/hydra-6.3-src.tar.gz; ./configure;
+      make; make install
+  source: https://github.com/vanhauser-thc/thc-hydra
+  description: This tool is a proof of concept code, to give researchers and security
+    consultants the possibility to show how easy it would be to gain unauthorized
+    access from remote to a system.
+  dependencies:
+  - C
+  help:
+  - http://tools.kali.org/password-attacks/hydra
+  - https://hackertarget.com/brute-forcing-passwords-with-ncrack-hydra-and-medusa/
+  examples:
+    Example 1:
+      description: Used ncrack to attack SSH on target 10.10.10.10 using root and
+        passwordlist using 32 threads
+      command: hydra -t 32 -l root -P 500-worst-passwords.txt 10.10.10.10 ssh
+manalyze:
+  name: Manalyze - PE Executables Static Analyzer
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/JusticeRage/Manalyze.git
+    custom: git clone https://github.com/JusticeRage/Manalyze.git; cd Manalyze; cmake
+      .; make; cd bin && ./manalyze --version
+    script: false
+  source: https://github.com/JusticeRage/Manalyze
+  description: Manalyze is a robust parser for PE files with a flexible plugin architecture
+    which allows users to statically analyze files in-depth.
+  dependencies:
+  - C++
+  - libboost-regex-dev
+  - libboost-program-options-dev
+  - libboost-system-dev
+  - libboost-filesystem-dev
+  - build-essential
+  - cmake
+  help:
+  - https://n0where.net/pe-executables-static-analyzer-manalyze/
+  examples:
+    Example 1:
+      description: Run manalyze ( in windows, but also on linux ) on an executable
+        program.exe
+      command: manalyze.exe program.exe
+strings:
+  name: Strings
+  install:
+    apt: apt-get install strings
+    yum: yum install strings
+    brew: false
+    script: false
+  source: https://github.com/torvalds/linux/blob/master/lib/string.c
+  description: For each file given, GNU strings prints the printable character sequences
+    that are at least 4 characters long (or the number given with the options below)
+    and are followed by an unprintable character.
+  dependencies:
+  - C
+  help:
+  - http://www.thegeekstuff.com/2012/03/reverse-engineering-tools/
+  - http://linux.die.net/man/1/strings
+  examples:
+    Example 1:
+      description: Strings is a command which print the strings of printable characters
+        in files. In thise, the who command.
+      command: strings /usr/bin/who
+nm:
+  name: Nm
+  install:
+    apt: apt-get install nm
+    yum: yum install nm
+    brew: false
+    script: false
+  source: https://github.com/torvalds/linux/blob/master/arch/parisc/nm
+  description: GNU nm lists the symbols from object files objfile.... If no object
+    files are listed as arguments, nm assumes the file a.out.
+  dependencies:
+  - C
+  help:
+  - http://www.thegeekstuff.com/2012/03/reverse-engineering-tools/
+  - http://linux.die.net/man/1/nm
+  examples:
+    Example 1:
+      description: nm command, is used to list the symbols from the target program.
+        By using nm, we can get to know the local and library functions and also the
+        global variables used. In thise, the who command.
+      command: nm /usr/bin/who
+ltrace:
+  name: Ltrace
+  install:
+    apt: apt-get install ltrace
+    yum: yum install ltrace
+    brew: false
+    git: git clone https://github.com/dkogan/ltrace.git
+    script: false
+  source: https://github.com/dkogan/ltrace
+  description: Ltrace is a debugging program which runs a specified command until
+    the command exits.  While the command is executing, ltrace intercepts and records
+    both the dynamic library calls called by the executed process and the signals
+    received by the executed process.  Ltrace can also intercept and print system
+    calls executed by the process.
+  dependencies:
+  - C
+  help:
+  - http://www.thegeekstuff.com/2012/03/reverse-engineering-tools/
+  - http://man7.org/linux/man-pages/man1/ltrace.1.html
+  examples:
+    Example 1:
+      description: You can observe that there is a set of calls to getutxent and its
+        family of library function. You can also note that ltrace gives the results
+        in the order the functions are called in the program. In thise, the who command.
+      command: ltrace /usr/bin/who
+strace:
+  name: Strace
+  install:
+    apt: apt-get install strace
+    yum: yum install strace
+    brew: false
+    git: git clone https://github.com/strace/strace.git
+    script: false
+  source: https://github.com/strace/strace
+  description: Strace is a diagnostic, debugging and instructional userspace utility
+    for Linux. It is used to monitor interactions between processes and the Linux
+    kernel, which include system calls, signal deliveries, and changes of process
+    state.
+  dependencies:
+  - C
+  help:
+  - http://www.thegeekstuff.com/2012/03/reverse-engineering-tools/
+  - http://strace.io/
+  examples:
+    Example 1:
+      description: You can trace the system calls made by the program. If a program
+        is not using any library function, and it uses only system calls, then using
+        plain ltrace, we cannot trace the program execution. In thise, the who command.
+      command: strace /usr/bin/who
+clang: 
+apktool: 
+clang++: 
+dex2jar: 
+flasm: 
+jad: 
+javasnoop: 
+NASMshell: 
+ollydbg: 
+radare2: 
+t50:
+  name: T50 - Very fast network stress tool
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/fredericopissarra/t50.git
+    script: false
+  source: https://github.com/fredericopissarra/t50
+  description: T50 is a multi-protocol packet injector, created by the brazilian Nelson
+    Brito, capable of DoS and DDoS attacks using the concept of stress testing.
+  dependencies:
+  - C
+  help:
+  - https://n0where.net/fast-network-stress-tool/
+  examples:
+    Example 1:
+      description: Flood victim 10.0.0.3 with turbo option.
+      command: t50 10.0.0.3 --flood -S --turbo
+    Example 2:
+      description: Flood victim 10.0.0.3 specifying protocol and port.
+      command: t50 10.0.0.3 --flood --turbo --dport (80 443) -S --protocol TCP
+mimikittenz:
+  name: Mimikittenz - Post Exploitation Powershell Tool
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/putterpanda/mimikittenz.git
+    script: false
+  source: https://github.com/putterpanda/mimikittenz
+  description: mimikittenz is a post-exploitation powershell tool that utilizes the
+    Windows function ReadProcessMemory() in order to extract plain-text passwords
+    from various target processes.
+  dependencies:
+  - Powershell
+  help:
+  - https://n0where.net/post-exploitation-powershell-tool-mimikittenz/
+  examples:
+    Example 1:
+      description: Start Mimikittenz
+      command: Invoke-mimikittenz
+cloakify:
+  name: Cloakify Toolset - Data Exfiltration In Plain Sight
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/TryCatchHCF/Cloakify.git
+    script: false
+  source: https://github.com/trycatchhcf/cloakify
+  description: Python scripts to cloak / uncloak payloads using list-based ciphers
+    (text-based steganography). Allows you to transfer data across a secure network’s
+    perimeter without triggering alerts, defeating data whitelisting controls, and
+    derailing analyst’s review via social engineering attacks against their workflows.
+    As a bonus, cloaked files defeat signature-based malware detection tools.
+  dependencies:
+  - Python
+  help:
+  - https://n0where.net/ransack-post-exploitation-tool/
+  examples:
+    Example 1:
+      description: Cloakify information example.
+      command: "./cloakify.py payload.txt ciphers/desserts.ciph > cloaked.txt"
+    Example 2:
+      description: De-cloakify information example.
+      command: "./decloakify.py cloaked.txt ciphers/desserts.ciph"
+ransack:
+  name: Ransack Post Exploitation Tool
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/E-Fensive/Ransack.git
+    script: false
+  source: https://github.com/E-Fensive/Ransack
+  description: Ransack's sole purpose is to grab any information deemed relevant following
+    a root compromise during an authorized penetration test. This information may
+    include config files, ssh keys, ssl keys, or any other information deemed valuable.
+  dependencies:
+  - Shell
+  help:
+  - https://n0where.net/ransack-post-exploitation-tool/
+  examples:
+    Example 1:
+      description: Use tool on host.
+      command: "./ransack.sh"
+brutexss:
+  name: BruteXSS - Cross-Site Scripting Bruteforcer
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/shawarkhanethicalhacker/BruteXSS.git
+    script: false
+  source: https://github.com/shawarkhanethicalhacker/BruteXSS
+  description: BruteXSS is a very powerful and fast Cross-Site Scripting Brutforcer
+    which is used for bruteforcing a parameters. The BruteXSS injects multiple payloads
+    loaded from a specified wordlist and fires them at the specified parameters and
+    scans if any of the parameter is vulnerable to XSS vulnerability. BruteXSS is
+    very accurate at doing its task and there is no chance of false positive as the
+    scanning is much powerful. BruteXSS supports POST and GET requests which makes
+    it compatible with the modern web applications.
+  dependencies:
+  - Python
+  help:
+  - https://n0where.net/cross-site-scripting-bruteforcer-brutexss/
+  examples:
+    Example 1:
+      description: Start using Brute-XSS
+      command: python brutexss.py
+xxspy:
+  name: XssPy - Web Application XSS Scanner
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/faizann24/XssPy.git
+    script: false
+  source: https://github.com/faizann24/XssPy
+  description: XssPy is a python tool for finding Cross Site Scripting vulnerabilities
+    in websites. This tool is the first of its kind. Instead of just checking one
+    page as most of the tools do, this tool traverses the website and find all the
+    links and subdomains first.
+  dependencies:
+  - Python 2.7
+  help:
+  - https://n0where.net/python-web-application-xss-scanner-xsspy/
+  - http://fsecurify.com/xsspy-web-application-xss-scanner/
+  examples:
+    Example 1:
+      description: Use tool on an example website.
+      command: XssPy.py target-website.com
+autobuf:
+  name: Autobuf - Buffer Overflow Exploit Tool
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/tildeleb/autobuf.git
+    script: false
+  source: https://github.com/tildeleb/autobuf
+  description: Autobuf is a simple tool written in C++ for Linux that aids in finding
+    buffer overflow exploits. It calls gdb on a target program, progressively trying
+    larger inputs and checking the register values until the current instruction pointer
+    is overwritten.
+  dependencies:
+  - Go
+  help:
+  - https://n0where.net/buffer-overflow-exploit-tool-autobuf/
+  examples:
+    Example 1:
+      description: Simple useage, calling Autobut on a program
+      command: "./autobuf program_name"
+shard:
+  name: Shard - Detect Shared Passwords
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/philwantsfish/shard.git
+    script: false
+  source: https://github.com/philwantsfish/shard
+  description: A command line tool to detect shared passwords.
+  dependencies:
+  - Java
+  help:
+  - https://n0where.net/detect-shared-passwords-shard/
+  examples:
+    Example 1:
+      description: Given a username and password shard will attempt to authenticate
+        with multiple sites.
+      command: java -jar shard-1.0.jar -u USERNAME -p PASSWORDS
+searchsploit: 
+beefxxs:
+  name: BeEF
+  install:
+    apt: false
+    yum: false
+    brew: false
+    gem: gem install beef
+    git: git clone https://github.com/beefproject/beef.git
+    script: false
+  source: https://github.com/beefproject/beef
+  description: BeEF is short for The Browser Exploitation Framework. It is a penetration
+    testing tool that focuses on the web browser.
+  dependencies:
+  - git
+  - rvm
+  - curl
+  - Ruby
+  - Gem beef
+  help:
+  - http://beefproject.com/
+  examples:
+    Example 1:
+      description: Start BeEF gui
+      command: service beef-xss start
+    Example 2:
+      description: Stop BeEF gui
+      command: service beef-xss stop
+msfpayload: 
+msfvenom:
+  name: Metasploit standalone payload generator
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/rapid7/metasploit-framework.git
+    script: false
+  source: https://github.com/rapid7/metasploit-framework/blob/master/msfvenom
+  description: msfvenom is a combination of Msfpayload and Msfencode, putting both
+    of these tools into a single Framework instance.
+  dependencies:
+  - Ruby
+  help:
+  - https://www.offensive-security.com/metasploit-unleashed/msfvenom/
+  - https://github.com/rapid7/metasploit-framework/wiki/How-to-use-msfvenom
+  examples:
+    Example 1:
+      description: An example msfvenom payload for windows.
+      command: msfvenom -a x86 --platform Windows -p windows/shell/bind_tcp -e x86/shikata_ga_nai
+        -b '\x00' -i 3 -f python
+set: 
+sqlmap:
+  name: sqlmap
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/sqlmapproject/sqlmap.git
+    script: false
+  source: https://code.google.com/archive/p/armitage/
+  description: Armitage is a graphical cyber attack management tool for Metasploit
+    that visualizes your targets, recommends exploits, and exposes the advanced capabilities
+    of the framework.
+  dependencies:
+  - metasploit
+  help:
+  - http://www.fastandeasyhacking.com/manual
+  examples:
+    Example 1:
+      description: Start armitage.
+      command: armitage
+armitage:
+  name: Armitage
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/ccdc/armitage.git
+    script: false
+  source: https://code.google.com/archive/p/armitage/
+  description: Armitage is a graphical cyber attack management tool for Metasploit
+    that visualizes your targets, recommends exploits, and exposes the advanced capabilities
+    of the framework.
+  dependencies:
+  - metasploit
+  help:
+  - http://www.fastandeasyhacking.com/manual
+  examples:
+    Example 1:
+      description: Start armitage.
+      command: armitage
+metasploit:
+  name: Metasploit Framework
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/rapid7/metasploit-framework.git
+    script: false
+  source: https://github.com/rapid7/metasploit-framework
+  description: Metasploit is a penetration testing platform that enables you to find,
+    exploit, and validate vulnerabilities.
+  dependencies:
+  - Ruby
+  - postgresql
+  help:
+  - https://help.rapid7.com/metasploit/index.html
+  - http://docs.kali.org/general-use/starting-metasploit-framework-in-kali
+  examples:
+    Example 1:
+      description: Start metasploit framework.
+      command: msfconsole
+macchanger:
+  name: Mac Changer
+  install:
+    apt: apt-get install macchanger
+    yum: yum install macchanger
+    brew: false
+    git: git clone https://github.com/alobbs/macchanger.git
+    script: false
+  source: https://mirrors.kernel.org/gnu/macchanger/
+  description: MAC Changer is an utility that makes the maniputation of MAC addresses
+    of network interfaces easier
+  dependencies:
+  - C
+  help:
+  - https://linuxconfig.org/change-mac-address-with-macchanger-linux-command
+  examples:
+    Example 1:
+      description: Set random mac address for interface eth0
+      command: macchanger -r eth0
+byteforce:
+  name: ByteForce - Offline Digital Forensics Tool for Binary Files
+  install:
+    apt: false
+    yum: false
+    brew: false
+    git: git clone https://github.com/weaknetlabs/ByteForce.git
+    script: false
+  source: https://github.com/weaknetlabs/ByteForce
+  description: Offline Digital Forensics Tool for Binary Files This tool can be used
+    for (offline) digital forensics and malware analysis as it shows all raw bytes
+    of a file and also the ASCII representations. As you can see from the screenshots,
+    I have used it on a few different file types, TXT, PNG, Compiled C code, and even
+    a packet capture file. It has three columns, one to show the byte count on the
+    far left. Then, in the middle the hexadecimal bytes of the file, and on the right
+    the ASCII representations (if there are any) of the hexadecimal bytes.
+  dependencies:
+  - C
+  help:
+  - https://n0where.net/offline-digital-forensics-tool-byteforce/
+  examples:
+    Example 1:
+      description: Check the document for a valid PDF header and also to search for
+        plain-text case-insensitive executable file names. ByteForce showing a potentially
+        dangerous PDF file made using Metasploit.
+      command: "./ByteForce msf.pdf"
+vim:
+  name: Vim
+  install:
+    apt: apt-get install vim
+    yum: yum install vim
+    brew: brew install vim
+    git: git clone https://github.com/vim/vim.git
+    script: false
+  source: https://github.com/vim/vim
+  description: Vim is a greatly improved version of the good old UNIX editor Vi. Many
+    new features have been added; multi-level undo, syntax highlighting, command line
+    history, on-line help, spell checking, filename completion, block operations,
+    script language, etc.
+  dependencies:
+  - C
+  help:
+  - http://www.vim.org/
+  examples:
+    Example 1:
+      description: Open a file ( file.txt ) in vim
+      command: vim file.txt
+emacs:
+  name: emacs
+  install:
+    apt: apt-get install emacs
+    yum: yum install emacs
+    brew: brew install emacs
+    git: git clone https://github.com/emacs-mirror/emacs.git
+    script: false
+  source: https://github.com/emacs-mirror/emacs
+  description: Emacs is the extensible, customizable, self-documenting real-time display
+    editor.
+  dependencies:
+  - C
+  help:
+  - https://www.gnu.org/software/emacs/
+  examples:
+    Example 1:
+      description: Open a file ( file.txt ) in emacs
+      command: emacs file.txt

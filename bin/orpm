@@ -1,0 +1,74 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+
+require 'pry'
+require 'orpm'
+
+def banner
+	puts "ORPM ".bold + " One Ring Package Manager".bold.red
+end
+
+def poem
+	puts
+	puts "Brew for the Apple-kings under the sky,"
+	puts "Aptitude for the Debian-lords in their halls of stone,"
+	puts "Yellowdog for Red-Hatted Men doomed to die,"
+	puts "Git for the Open Lord on his open throne"
+	puts "In the Land of Terminals where the Hackers lie."
+	puts "One Ring to rule them all, One Ring to find them,"
+	puts "One Ring to bring them all and in the darkness bind them"
+	puts "In the Land of Teminals where the Hackers lie."
+	puts
+end
+
+def clear_screen
+	system('clear')
+end
+
+
+# Default option to help menu if nothing is set.
+foo = ARGV[0] || ARGV[0] = '-h'
+
+# Available options.
+opts = Trollop::options do
+	banner "O R P M".red.bold + " | " + "One Ring Package Manager".white.bold
+	version "Honey Pot v 1.0"
+	opt :packages, "specify a list of packages to work with", :type => :strings
+	opt :Sudo, "install packages with sudo if possible"
+	opt :install, "package manager is decided automagically"
+	opt :apt, "install packages with apt"
+	opt :yum, "install packages with yum"
+	opt :brew, "install packages with brew"
+	opt :git, "install packages with git"
+	opt :raw, "install packages with git raw"
+	opt :Info, "get information about selected packages"
+	opt :Yes, "set default answer yes to any iterative menus"
+	opt :search, "search for selected packages to see if they exist"
+	opt :Poem, "display a beautiful Tolkien-esque parody poem"
+	opt :Debug, "enter a debug mode with pry"
+	opt :list, "list the available packages"
+	opt :Rainbow, "rainbow support, because we need it"
+	#opt :Logging, "Log all connections."
+end
+
+# If user just wants a cute little poem.
+if opts[:Poem]
+	poem
+	exit 0
+end
+
+# Package manager logic from OneRing powers.
+package_manager = Orpm::OneRing.new(opts)
+
+if opts[:Info]
+	opts[:packages].each do |package|
+		package_manager.show_info(package)
+	end
+end
+
+# Debug mode from options.
+if opts[:debug]
+	package_manager.debug
+end
+
+exit 0
