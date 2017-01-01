@@ -56,6 +56,46 @@ module Orpm
       end
     end
 
+    def show_info
+      puts "PACKAGE".bold
+      puts "Package: " + package_name
+      puts "Name: " + full_name
+      puts
+      puts "INSTALLATION".bold
+      puts "   Apt: " + apt.to_s
+      puts "   Yum: " + yum.to_s
+      puts "  Brew: " + brew.to_s
+      puts "   Git: " + git.to_s
+      puts "Script: " + script.to_s
+      puts "Source: " + source.to_s
+      puts
+      puts "DESCRIPTION".bold
+      if description?
+        puts description
+        puts
+      else
+        puts "None."
+      end
+      puts "EXAMPLES".bold
+      if examples?
+        examples.each do |example|
+          puts "  " + example[0]
+          puts "  " + example[1]["description"]
+          puts "  " + "$ ".bold + example[1]["command"]
+          puts
+        end
+      else
+        puts "None."
+      end
+      puts "HELP".bold
+      if help?	
+        puts help
+        puts
+      else
+        puts "None."
+      end
+    end
+
     def name?
       name ? true : false
     end

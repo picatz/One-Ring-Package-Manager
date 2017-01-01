@@ -4,7 +4,7 @@ Yo', dog. I heard you like package managers. So I made a package manager for yo'
 
 ## Concept
 
-This gem is still in development! But, the gist of it it is:
+This gem is still in development! But, the gist of it is:
 
 ### Command-Line Application
 
